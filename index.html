@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ArtLauncher Privacy Policy</title>
+<style>
+body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; max-width: 860px; margin: 2rem auto; padding: 0 1rem; color: #1b1b1f; }
+h1 { font-size: 1.9rem; } h2 { margin-top: 2rem; border-bottom: 1px solid #ddd; padding-bottom: .3rem; }
+table { border-collapse: collapse; width: 100%; } th, td { border: 1px solid #ddd; padding: .5rem; text-align: left; vertical-align: top; }
+code { background: #f2f2f5; padding: .1rem .3rem; border-radius: 4px; }
+a { color: #4a4ade; }
+</style>
+</head>
+<body>
+<h1>ArtLauncher Privacy Policy</h1>
+<p>Last updated: 2026-11-21</p>
+<p>ArtLauncher (<code>com.artem.artlauncher</code>) is a launcher for Android 14+. It is developed by
+the GitHub user <code>asilenkov</code>. This policy explains what the app does with information on
+your device and what leaves the device.</p>
+<h2>Summary</h2>
+<ul>
+<li>No account, no advertising, no analytics, no crash-upload SDK, no in-app purchases.</li>
+<li>Notifications, conversations, contacts, calendar, screenshots, usage stats and AI
+  prompts are processed <strong>on your device only</strong>.</li>
+<li>The only data sent off the device is the weather/currency request described below,
+  plus AI model binaries downloaded after you opt in.</li>
+<li>No server operated by the developer receives your personal data.</li>
+</ul>
+<h2>Data processed only on the device</h2>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Why the app reads it</th>
+<th>Where it stays</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Notification content (titles, text, big text, media metadata)</td>
+<td>Unread badges, Conversations Hub, smart live chips, on-device AI digest and search</td>
+<td>Room database (<code>conversations.db</code>) and memory; never uploaded</td>
+</tr>
+<tr>
+<td>Contacts</td>
+<td>People suggestions and call/message actions in search</td>
+<td>Processed in memory; never uploaded</td>
+</tr>
+<tr>
+<td>Calendar events</td>
+<td>Calendar widget and automatic Zen during meetings</td>
+<td>Processed locally; never uploaded</td>
+</tr>
+<tr>
+<td>Photos/images</td>
+<td>Screenshot OCR search; indexing starts only after you open Search and grant photo access</td>
+<td>On-device OCR index and, for manual imports, images stored locally</td>
+</tr>
+<tr>
+<td>App usage statistics (<code>PACKAGE_USAGE_STATS</code>)</td>
+<td>On-device suggestions</td>
+<td>Processed in memory; no history database</td>
+</tr>
+<tr>
+<td>Installed apps list (<code>QUERY_ALL_PACKAGES</code>)</td>
+<td>Drawer and search — the core launcher function</td>
+<td>Processed locally; never uploaded</td>
+</tr>
+<tr>
+<td>Location and nearby Wi-Fi/Bluetooth state</td>
+<td>Weather "My location", workspace profiles and diagnostics</td>
+<td>Location is used in memory; profile rules stay in local settings</td>
+</tr>
+<tr>
+<td>Voice input</td>
+<td>Optional voice search fallback via <code>SpeechRecognizer</code></td>
+<td>Processed by the system service; no audio is uploaded by ArtLauncher</td>
+</tr>
+<tr>
+<td>AI prompts (notification text, search queries, screenshots)</td>
+<td>On-device Gemini Nano (AICore) or optional local LiteRT model</td>
+<td>Inference runs on the device; no prompt is sent to a server</td>
+</tr>
+</tbody>
+</table>
+<p>Recent launches are kept only in a bounded in-memory list and are cleared when the app
+process ends. There is no launch-history file, no crash-log file and no export of
+activity traces. The crash counter used by Safe Mode and the diagnostics snapshot are
+local, user-triggered features.</p>
+<h2>Data transmitted off the device</h2>
+<p>All requests use HTTPS. The developer does not operate a server for the app.</p>
+<ol>
+<li><strong>Weather.</strong> When you ask for weather by city name, the city text is sent to
+   <code>geocoding-api.open-meteo.com</code> (Open-Meteo). When you use "My location", coordinates
+   rounded to two decimals (about 1 km) are sent to <code>api.open-meteo.com</code> (Open-Meteo).
+   Coordinates are used in memory for the request and are not stored by ArtLauncher.</li>
+<li><strong>Currency rates.</strong> <code>cdn.jsdelivr.net</code> is used to fetch a public RUB exchange-rate
+   file (<code>@fawazahmed0/currency-api</code>). No user data is included; only the request's IP
+   address is visible to the CDN.</li>
+<li><strong>AI models.</strong> Gemini Nano is downloaded and managed by Android AICore / Google Play
+   services after you enable the feature. The optional LiteRT Qwen2.5 model is
+   downloaded from <code>huggingface.co</code> only after you tap the download button, over an
+   unmetered network. These downloads contain model binaries only — never your
+   notifications, prompts, screenshots or contacts.</li>
+</ol>
+<p>As with any HTTPS request, the provider sees your IP address and standard request
+metadata. ArtLauncher does not add advertising identifiers or tracking parameters.</p>
+<h2>Android Auto Backup</h2>
+<p>If Auto Backup is enabled in Android settings, the system may copy app settings and
+preferences (DataStore and SharedPreferences, except the crash counter) to your Google
+account and to a new device. The Room databases — conversations, favorites, hidden apps,
+notes and the screenshot OCR index — are excluded from backup.</p>
+<h2>Permissions and why they are used</h2>
+<p><code>INTERNET</code>/<code>ACCESS_NETWORK_STATE</code> — weather, currency and opt-in model downloads.
+<code>POST_NOTIFICATIONS</code> — focus-timer completion notification; requested when a timer starts.
+<code>READ_CALENDAR</code> — calendar widget. <code>READ_CONTACTS</code> — people search.
+<code>READ_MEDIA_IMAGES</code> — screenshot OCR. <code>RECORD_AUDIO</code> — optional voice-search fallback.
+<code>ACCESS_FINE_LOCATION</code>/<code>ACCESS_COARSE_LOCATION</code> — weather by location and context rules.
+<code>BLUETOOTH_CONNECT</code>/<code>NEARBY_WIFI_DEVICES</code>/<code>ACCESS_WIFI_STATE</code> — car/headset and network
+context. <code>PACKAGE_USAGE_STATS</code> — app suggestions. <code>QUERY_ALL_PACKAGES</code> — installed-app
+drawer and search. <code>BIND_NOTIFICATION_LISTENER_SERVICE</code> — Conversations Hub and badges.
+<code>BIND_ACCESSIBILITY_SERVICE</code> — an <strong>opt-in accessibility shortcut</strong> for users with limited
+mobility: double-tap to lock the screen. It performs only <code>GLOBAL_ACTION_LOCK_SCREEN</code>; it
+does not read the screen, observe gestures or collect data, and it is off by default.</p>
+<p>All sensitive permissions are optional; the launcher still works without them.</p>
+<h2>Retention and deletion</h2>
+<p>Local data remains on your device until you remove it in the app or uninstall the app.
+Uninstalling Android apps deletes their app-private data. Data sent to Open-Meteo or the
+CDN is processed by those providers under their own retention policies. Because the app
+has no accounts and no developer server, there is no server-side record to request
+deletion of.</p>
+<h2>Children</h2>
+<p>ArtLauncher is not directed to children under 13 (or the applicable age of digital
+consent in your country).</p>
+<h2>Contact</h2>
+<p>Questions or privacy reports: open an issue at
+<a href="https://github.com/asidenkov/artlauncher/issues">https://github.com/asidenkov/artlauncher/issues</a>.</p>
+<h2>Changes</h2>
+<p>Updates to this policy will be published at the same URL with a new "Last updated" date.</p>
+<hr />
+<h1>Политика конфиденциальности ArtLauncher</h1>
+<p>Обновлено: 2026-11-21</p>
+<p>ArtLauncher (<code>com.artem.artlauncher</code>) — лаунчер для Android 14+; разработчик —
+пользователь GitHub <code>asilenkov</code>.</p>
+<h2>Кратко</h2>
+<ul>
+<li>Нет аккаунтов, рекламы, аналитики, выгрузки крэшей и покупок в приложении.</li>
+<li>Уведомления, диалоги, контакты, календарь, скриншоты, статистика использования и AI-запросы
+  обрабатываются <strong>только на устройстве</strong>.</li>
+<li>С устройства уходит только запрос погоды/курса валют и — после вашего согласия — загрузка
+  моделей AI.</li>
+<li>Сервер разработчика не получает ваши личные данные.</li>
+</ul>
+<h2>Данные, которые остаются на устройстве</h2>
+<table>
+<thead>
+<tr>
+<th>Данные</th>
+<th>Зачем читаются</th>
+<th>Где хранятся</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Содержимое уведомлений</td>
+<td>Бейджи, хаб диалогов, live-коды, локальный AI-дайджест и поиск</td>
+<td>Локальная БД <code>conversations.db</code> и память; не выгружается</td>
+</tr>
+<tr>
+<td>Контакты</td>
+<td>Подсказки людей и действия звонка/сообщения в поиске</td>
+<td>Только в памяти</td>
+</tr>
+<tr>
+<td>Календарь</td>
+<td>Виджет и автоматический Zen во время встреч</td>
+<td>Локально</td>
+</tr>
+<tr>
+<td>Фото/скриншоты</td>
+<td>OCR-поиск; индексация начинается только после открытия поиска и выдачи доступа</td>
+<td>Локальный индекс и импортированные изображения</td>
+</tr>
+<tr>
+<td>Статистика использования</td>
+<td>Локальные подсказки приложений</td>
+<td>Только в памяти, без истории</td>
+</tr>
+<tr>
+<td>Список установленных приложений</td>
+<td>Список и поиск — основная функция лаунчера</td>
+<td>Локально</td>
+</tr>
+<tr>
+<td>Геолокация и состояние Wi‑Fi/Bluetooth</td>
+<td>Погода «по месту», профили, диагностика</td>
+<td>Координаты живут только в памяти запроса</td>
+</tr>
+<tr>
+<td>Голос</td>
+<td>Резервный голосовой поиск через <code>SpeechRecognizer</code></td>
+<td>Обрабатывается системой; приложение не загружает аудио</td>
+</tr>
+<tr>
+<td>AI-запросы</td>
+<td>Локальный вывод Gemini Nano или LiteRT</td>
+<td>Вывод выполняется на устройстве</td>
+</tr>
+</tbody>
+</table>
+<p>Недавние запуски хранятся только в ограниченном списке в памяти и очищаются вместе с
+процессом. Нет файлов истории запусков, файлов крэш-логов и выгрузок активности.</p>
+<h2>Что передаётся с устройства</h2>
+<p>Все запросы идут по HTTPS. Сервера разработчика нет.</p>
+<ol>
+<li><strong>Погода.</strong> При поиске по городу текст города отправляется в Open-Meteo
+   (<code>geocoding-api.open-meteo.com</code>); при выборе «моё местоположение» в <code>api.open-meteo.com</code>
+   уходят координаты, округлённые до двух знаков (~1 км). Они не сохраняются приложением.</li>
+<li><strong>Курсы валют.</strong> Публичный файл загружается с <code>cdn.jsdelivr.net</code>; пользовательские
+   данные в запросе отсутствуют.</li>
+<li><strong>Модели AI.</strong> Gemini Nano загружается через AICore / Google Play services после
+   включения функции; модель LiteRT Qwen загружается с <code>huggingface.co</code> только по явной
+   кнопке и только в неметрифицированной сети. Загружаются только файлы моделей.</li>
+</ol>
+<p>Провайдеры видят IP-адрес и стандартные метаданные HTTPS-запроса. Рекламных идентификаторов
+и параметров отслеживания приложение не добавляет.</p>
+<h2>Резервное копирование Android</h2>
+<p>Если в настройках системы включён Auto Backup, система может скопировать настройки
+приложения (DataStore и SharedPreferences, кроме счётчика крэшей) в аккаунт Google и на
+новое устройство. Базы данных (диалоги, избранное, скрытые приложения, заметки, OCR-индекс)
+в резервную копию не входят.</p>
+<h2>Разрешения</h2>
+<p><code>INTERNET</code>/<code>ACCESS_NETWORK_STATE</code> — погода, курсы и загрузка моделей.
+<code>POST_NOTIFICATIONS</code> — уведомление об окончании таймера; запрашивается при запуске таймера.
+<code>READ_CALENDAR</code> — виджет календаря. <code>READ_CONTACTS</code> — поиск людей.
+<code>READ_MEDIA_IMAGES</code> — OCR скриншотов. <code>RECORD_AUDIO</code> — резервный голосовой поиск.
+Геолокация — погода по месту и контекст. Bluetooth/Wi‑Fi — авто/наушники и сеть.
+<code>PACKAGE_USAGE_STATS</code> — подсказки. <code>QUERY_ALL_PACKAGES</code> — список и поиск приложений.
+Доступ к уведомлениям — хаб диалогов и бейджи. Accessibility — дополнительная функция
+доступности для пользователей с ограниченной подвижностью: двойной тап блокирует экран.
+Сервис только выполняет блокировку, не читает экран, не отслеживает жесты и выключен по
+умолчанию. Все чувствительные разрешения необязательны.</p>
+<h2>Хранение и удаление</h2>
+<p>Данные остаются на устройстве до удаления в приложении или удаления приложения. Аккаунтов
+и сервера разработчика нет, поэтому серверных записей для удаления не существует.</p>
+<h2>Дети</h2>
+<p>Приложение не предназначено для детей младше 13 лет (или иного возраста цифрового
+согласия в стране).</p>
+<h2>Контакты</h2>
+<p>Вопросы: <a href="https://github.com/asidenkov/artlauncher/issues">https://github.com/asidenkov/artlauncher/issues</a>.</p>
+</body>
+</html>
